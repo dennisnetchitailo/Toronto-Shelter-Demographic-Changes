@@ -1,8 +1,8 @@
 #### Preamble ####
 # Purpose: Simulates... [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
+# Author: Dennis Netchitailo [...UPDATE THIS...]
 # Date: 22 September 2024
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Contact: dennis.netchitailo@utoronto.ca [...UPDATE THIS...]
 # License: MIT
 # Pre-requisites: [...UPDATE THIS...]
 # Any other information needed? [...UPDATE THIS...]
