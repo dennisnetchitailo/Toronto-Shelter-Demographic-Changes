@@ -2,10 +2,9 @@
 title: "My title"
 subtitle: "My subtitle if needed"
 author: 
-  - First author
-  - Another author
+  - Dennis Netchitailo
 thanks: "Code and data are available at: LINK."
-date: today
+date: September 23, 2024
 date-format: long
 abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
 format: pdf
