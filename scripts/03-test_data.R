@@ -13,3 +13,6 @@ library(tidyverse)
 # [...UPDATE THIS...]
 
 #### Test data ####
+
+analysis_data <- read_csv("data/analysis_data/analysis_data.csv")
+
