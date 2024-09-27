@@ -1,8 +1,8 @@
 #### Preamble ####
 # Purpose: Simulates... [...UPDATE THIS...]
-# Author: Dennis Netchitailo [...UPDATE THIS...]
+# Author: Dennis Netchitailo 
 # Date: 22 September 2024
-# Contact: dennis.netchitailo@utoronto.ca [...UPDATE THIS...]
+# Contact: dennis.netchitailo@utoronto.ca 
 # License: MIT
 # Pre-requisites: [...UPDATE THIS...]
 # Any other information needed? [...UPDATE THIS...]

@@ -1,11 +1,11 @@
 #### Preamble ####
-# Purpose: Downloads and saves the data from OpenTorontoData.
+# Purpose: Downloads and saves the dataset "Toronto  Shelter System Flow"
+# from OpenDataToronto.
 # Author: Dennis Netchitailo
 # Date: 23 September 2024 
 # Contact: dennis.netchitailo@utoronto.ca 
 # License: MIT
 # Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
 
 
 #### Workspace setup ####

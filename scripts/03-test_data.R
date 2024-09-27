@@ -1,10 +1,10 @@
 #### Preamble ####
 # Purpose: Tests... [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Date: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Author: Dennis Netchitailo
+# Date: 26 September 2024 
+# Contact: dennis.netchitailo@utoronto.ca 
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
+# Pre-requisites: Run the files "01-download_data.R" and "02-data_cleaning.R"
 # Any other information needed? [...UPDATE THIS...]
 
 
@@ -14,5 +14,30 @@ library(tidyverse)
 
 #### Test data ####
 
-analysis_data <- read_csv("data/analysis_data/analysis_data.csv")
+data <- read_csv("data/analysis_data/analysis_data.csv")
+
+# Test for negative values
+data$'returned_from_housing' |> min() >= 0
+data$'returned_to_shelter' |> min() >= 0
+data$'newly_identified' |> min() >= 0
+data$'moved_to_housing' |> min() >= 0
+data$'became_inactive' |> min() >= 0
+data$'actively_homeless' |> min() >= 0 
+data$'ageunder16' |> min() >= 0
+data$'age16_24' |> min() >= 0
+data$'age25_34' |> min() >= 0
+data$'age35_44' |> min() >= 0
+data$'age45_54' |> min() >= 0
+data$'age55_64' |> min() >= 0
+data$'age65over' |> min() >= 0
+data$'gender_male' |> min() >= 0
+data$'gender_female' |> min() >= 0
+data$'gender_transgender_non_binary_or_two_spirit' |> min() >= 0
+
+# Test for NA
+all(is.na(data))
+
+#Test Dates
+all(data$date >= as.Date("2018-01-01") & data$date <= as.Date("2024-08-01"))
+                                                            
 
