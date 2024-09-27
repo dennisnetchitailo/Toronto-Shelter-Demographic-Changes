@@ -23,28 +23,39 @@ library(knitr)
 library(dplyr)
 library(ggplot2)
 library(readr)
-analysis_data <- read_csv("starter_folder/data/analysis_data/analysis_data.csv")
+library(lubridate)
+analysis_data <- read_csv("C:/Users/Dennis Netchitailo/Documents/GitHub/starter_folder/data/analysis_data/analysis_data.csv")
+
 ```
 
 
 # Introduction
 
-In 2018, 
-
-
-You can and should cross-reference sections and sub-sections. We use @citeR and @rohan.
-
-The remainder of this paper is structured as follows. @sec-data....
-
+Since 2018, the number of people using Toronto's shelter system has increased from eight thousand to over ten thousand, an increase of over 25%. For a city facing budgetary constraints, providing shelter to thousands more people than it did half a decade ago is expensive, and leads to the question "Why?". This paper looks at the changes in the shelter's demographic makeup, to try to understand what kind of people having been needing more or less shelter support relative to 2018. 
 
 
 # Data {#sec-data}
 
-## Introduction to the Dataset {#sec-intro-dataset} 
+## Raw Dataset {#sec-intro-dataset} 
 This paper uses the dataset "Shelter System Flow Data" from OpenDataToronto, which provides data on the types of people in shelters, their ages, and their genders. The time period covered by this dataset is January 2018 to August 2024. This data is collected by the use of the Shelter Management Information System (SMIS) to intake people into various types of shelters (emergency, overnight, hotel/motel programs, etc). 
 
 The limitation of this dataset is that it excludes people not captured by SMIS. This includes individuals who stay outdoors on their own, or who use private & public homeless services that do not track data through SMIS. 
+## Cleaned Dataset {#sec-intro-dataset} 
+Some of the variables were not assessed and were removed. 
+Figure *1* shows a sample of the cleaned dataset.
 
+```{r}
+#| label: fig-timeline
+#| fig-cap: Trends in the Type of Shelter Users 
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 8
+
+
+print(analysis_data)
+
+```
 
 ## Variables in the cleaned Dataset {#sec-variables}
 1. **Date**: Records the month & year for which data is provided. The range   
@@ -71,48 +82,7 @@ this age group.
 13. **Population Percentage for a Group**: Records the proportion of the total shelter population that a group occupies. 
 
 
-
-Some of our data is of penguins (@fig-bills), from @palmerpenguins.
-
-```{r}
-#| label: fig-bills
-#| fig-cap: Bills of penguins
-#| echo: false
-
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
-```
-
-Talk more about it.
-
-And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
-
-```{r}
-#| label: fig-planes
-#| fig-cap: Relationship between wing length and width
-#| echo: false
-#| warning: false
-#| message: false
-
-analysis_data <- read_csv(here::here("data/analysis_data/analysis_data.csv"))
-
-analysis_data |> 
-  ggplot(aes(x = width, y = length)) +
-  geom_point(alpha = 0.8) +
-  theme_minimal() +
-  labs(x = "Wing width (mm)",
-       y = "Wing length (mm)")
-```
-
-Talk way more about it. 
-
-
-### Change in {#sec-timeline}
+### Change in Shelter Subpopulations {#sec-timeline}
 ```{r}
 #| label: fig-timeline
 #| fig-cap: Trends in the Type of Shelter Users 
@@ -120,96 +90,36 @@ Talk way more about it.
 #| warning: false
 #| message: false
 #| fig-width: 8
-change_type <- combined_deaths %>%
-  pivot_longer(cols = c(yearly_drug_toxicity_deaths, yearly_unknown_deaths, yearly_total_deaths), 
-               names_to = "cause_of_death", 
-               values_to = "total_deaths")
 
-# Create the line plot for actual deaths 
-ggplot(long_deaths, aes(x = year_of_death, y = total_deaths, color = cause_of_death, group = cause_of_death)) +
-  geom_line(size = 1.2) +  # Draw the lines
-  geom_point(size = 3) +  # Add points for better visibility
-  labs(title = "Yearly Deaths by Cause Over Time(2017-2023)",
-       x = "Year",
-       y = "Total Deaths",
-       color = "Cause of Death") +  # Label the legend
+# Convert date format
+analysis_data <- analysis_data %>%
+  mutate(date_dmy = ymd(date_dmy))
+
+#Filter population groups
+selected_groups <- c("Chronic", "Refugees", "Families", "Youth", "Single Adult", "Non-refugees")
+filtered_groups <- analysis_data %>%
+  filter(population_group %in% selected_groups)
+
+# Create the line plot for the population size 
+ggplot(filtered_groups, aes(x = date_dmy, y = gender_male + gender_female + 
+                          gender_transgender_non_binary_or_two_spirit, 
+                          color = population_group)) +
+  geom_line(size = 1) +
+  labs(title = "Month-to-Month Change in Population by Subpopulation",
+       x = "Date",
+       y = "Total Population",
+       color = "Population Group") +
   theme_minimal() +
-  scale_color_manual(values = c("yearly_drug_toxicity_deaths" = "blue", 
-                                "yearly_unknown_deaths" = "red",
-                                "yearly_total_deaths" = "green")) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8),
-        plot.title = element_text(size = 10))
-
-
-# Model
-
-The goal of our modelling strategy is twofold. Firstly,...
-
-Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix -@sec-model-details].
-
-## Model set-up
-
-Define $y_i$ as the number of seconds that the plane remained aloft. Then $\beta_i$ is the wing width and $\gamma_i$ is the wing length, both measured in millimeters.  
-
-\begin{align} 
-y_i|\mu_i, \sigma &\sim \mbox{Normal}(\mu_i, \sigma) \\
-\mu_i &= \alpha + \beta_i + \gamma_i\\
-\alpha &\sim \mbox{Normal}(0, 2.5) \\
-\beta &\sim \mbox{Normal}(0, 2.5) \\
-\gamma &\sim \mbox{Normal}(0, 2.5) \\
-\sigma &\sim \mbox{Exponential}(1)
-\end{align}
-
-We run the model in R [@citeR] using the `rstanarm` package of @rstanarm. We use the default priors from `rstanarm`.
-
-
-### Model justification
-
-We expect a positive relationship between the size of the wings and time spent aloft. In particular...
-
-We can use maths by including latex between dollar signs, for instance $\theta$.
-
-
-# Results
-
-Our results are summarized in @tbl-modelresults.
-
-```{r}
-#| echo: false
-#| eval: true
-#| warning: false
-#| message: false
-
-library(rstanarm)
-
-first_model <-
-  readRDS(file = here::here("models/first_model.rds"))
+  theme(legend.position = "right")
 ```
 
-```{r}
-#| echo: false
-#| eval: true
-#| label: tbl-modelresults
-#| tbl-cap: "Explanatory models of flight time based on wing width and wing length"
-#| warning: false
-
-modelsummary::modelsummary(
-  list(
-    "First model" = first_model
-  ),
-  statistic = "mad",
-  fmt = 2
-)
-```
-
-
+Immediately, it is visible that Youth is the most stable group in terms of population. Families have also not undergone serious change, although why it dipped in 2021 is a question to further look into. Single Adults as a group have been rising, but not unsurprisingly, given the economic challenges Torontonians have been facing since Covid. The group with the wildest swings has been Refugees and Chronic. Both subgroups have more than tripled in number. The number of refugees, also during Covid, plunged, before rapidly growing to a number larger than even before the pandemic. 
 
 
 # Discussion
 
 ## First discussion point {#sec-first-point}
 
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
 
 ## Second discussion point
 
@@ -231,54 +141,6 @@ Weaknesses and next steps should also be included.
 # Model details {#sec-model-details}
 
 ## Posterior predictive check
-
-In @fig-ppcheckandposteriorvsprior-1 we implement a posterior predictive check. This shows...
-
-In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. This shows... 
-
-```{r}
-#| eval: true
-#| echo: false
-#| message: false
-#| warning: false
-#| label: fig-ppcheckandposteriorvsprior
-#| layout-ncol: 2
-#| fig-cap: "Examining how the model fits, and is affected by, the data"
-#| fig-subcap: ["Posterior prediction check", "Comparing the posterior with the prior"]
-
-pp_check(first_model) +
-  theme_classic() +
-  theme(legend.position = "bottom")
-
-posterior_vs_prior(first_model) +
-  theme_minimal() +
-  scale_color_brewer(palette = "Set1") +
-  theme(legend.position = "bottom") +
-  coord_flip()
-```
-
-## Diagnostics
-
-@fig-stanareyouokay-1 is a trace plot. It shows... This suggests...
-
-@fig-stanareyouokay-2 is a Rhat plot. It shows... This suggests...
-
-```{r}
-#| echo: false
-#| eval: true
-#| message: false
-#| warning: false
-#| label: fig-stanareyouokay
-#| fig-cap: "Checking the convergence of the MCMC algorithm"
-#| fig-subcap: ["Trace plot", "Rhat plot"]
-#| layout-ncol: 2
-
-plot(first_model, "trace")
-
-plot(first_model, "rhat")
-```
-
-
 
 \newpage
 
