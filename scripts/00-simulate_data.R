@@ -10,12 +10,10 @@
 
 #### Workspace setup ####
 library(tidyverse)
-# [...UPDATE THIS...]
 
-#### Simulate data ####
-# [...ADD CODE HERE...]
+# Testing Setup
 
-set.seed(1129)
+set.seed(1029)
 
 start_date <- as.Date("2018-01-01")
 end_date <- as.Date("2024-08-01")
