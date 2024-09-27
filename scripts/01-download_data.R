@@ -12,10 +12,8 @@
 #### Workspace setup ####
 library(opendatatoronto)
 library(tidyverse)
-# [...UPDATE THIS...]
 
 #### Download data ####
-# [...ADD CODE HERE TO DOWNLOAD...]
 
 package <- show_package("ac77f532-f18b-427c-905c-4ae87ce69c93")
 package
@@ -30,8 +28,6 @@ data <- filter(datastore_resources, row_number()==1) %>%
 
 
 #### Save data ####
-# [...UPDATE THIS...]
-# change the_raw_data to whatever name you assigned when you downloaded it.
 
 write_csv(data, "data/raw_data/raw_data.csv") 
 

@@ -6,7 +6,6 @@
 # License: MIT
 # Pre-requisites: Run the files "01-download_data.R" and "02-data_cleaning.R"
 # Have the following libraries installed: "tidyverse", "ggplot2", "dplyr"
-# Any other information needed? [...UPDATE THIS...]
 
 
 #### Workspace setup ####
@@ -18,7 +17,6 @@ library(dplyr)
 analysis_data <- read_csv("data/analysis_data/analysis_data.csv")
 
 ### Model data ####
-
 
 #Model 1 : Mean Proportion of Total Population by Gender 
 
@@ -78,10 +76,5 @@ saveRDS(
   change_total_pop,
   file = "models/change_total_pop.rds"
 )
-  
 
-  ####################################
-#d <- readRDS("models/mean_gender_all_pop.rds")
-#b <- readRDS("models/change_age16_24.rds")
-#c <- readRDS("models/change_total_pop.rds") 
   

@@ -1,17 +1,15 @@
 #### Preamble ####
-# Purpose: Tests... [...UPDATE THIS...]
+# Purpose: Tests the data for negative & NA values, and proper date range.  
 # Author: Dennis Netchitailo
 # Date: 26 September 2024 
 # Contact: dennis.netchitailo@utoronto.ca 
 # License: MIT
 # Pre-requisites: Run the files "01-download_data.R" and "02-data_cleaning.R"
 # Have the following libraries installed: "tidyverse"
-# Any other information needed? [...UPDATE THIS...]
 
 
 #### Workspace setup ####
 library(tidyverse)
-# [...UPDATE THIS...]
 
 #### Test data ####
 

@@ -5,8 +5,6 @@
 # Contact: dennis.netchitailo@utoronto.ca 
 # License: MIT
 # Pre-requisites: have the following libraries installed: "tidyverse"
-# Any other information needed? [...UPDATE THIS...]
-
 
 #### Workspace setup ####
 library(tidyverse)
