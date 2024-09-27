@@ -24,7 +24,7 @@ library(dplyr)
 library(ggplot2)
 library(readr)
 library(lubridate)
-analysis_data <- read_csv("C:/Users/Dennis Netchitailo/Documents/GitHub/starter_folder/data/analysis_data/analysis_data.csv")
+analysis_data <- read_csv("data/analysis_data/analysis_data.csv")
 
 ```
 
