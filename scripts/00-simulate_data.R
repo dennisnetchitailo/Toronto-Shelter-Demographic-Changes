@@ -1,10 +1,10 @@
 #### Preamble ####
-# Purpose: Simulates... [...UPDATE THIS...]
+# Purpose: Simulates the expected distribution of population over time. 
 # Author: Dennis Netchitailo 
 # Date: 22 September 2024
 # Contact: dennis.netchitailo@utoronto.ca 
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
+# Pre-requisites: have the following libraries installed: "tidyverse"
 # Any other information needed? [...UPDATE THIS...]
 
 

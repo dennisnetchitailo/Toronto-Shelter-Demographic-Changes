@@ -5,7 +5,8 @@
 # Date: 23 September 2024 
 # Contact: dennis.netchitailo@utoronto.ca 
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
+# Pre-requisite: have the following libraries installed: 
+"opendatatoronto","tidyverse"
 
 
 #### Workspace setup ####

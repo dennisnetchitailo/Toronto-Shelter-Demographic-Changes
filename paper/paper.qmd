@@ -1,12 +1,12 @@
 ---
-title: "My title"
+title: "Changes in the demographics of Toronto's shelter system (2018-2024)"
 subtitle: "My subtitle if needed"
 author: 
   - Dennis Netchitailo
-thanks: "Code and data are available at: LINK."
-date: September 23, 2024
+thanks: "Code and data are available at: https://github.com/dennisnetchitailo/Toronto-Shelter-Demographic-Changes"
+date: September 27, 2024
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "This paper examines the trends relating to demographic changes in Toronto's shelter system from 2018 to 2024, using publically-accesible data from OpenDataToronto."
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -18,11 +18,19 @@ bibliography: references.bib
 #| message: false
 
 library(tidyverse)
-library(palmerpenguins)
+library(opendatatoronto)
+library(knitr)
+library(dplyr)
+library(ggplot2)
+library(readr)
+analysis_data <- read_csv("starter_folder/data/analysis_data/analysis_data.csv")
 ```
 
 
 # Introduction
+
+In 2018, 
+
 
 You can and should cross-reference sections and sub-sections. We use @citeR and @rohan.
 
@@ -31,6 +39,38 @@ The remainder of this paper is structured as follows. @sec-data....
 
 
 # Data {#sec-data}
+
+## Introduction to the Dataset {#sec-intro-dataset} 
+This paper uses the dataset "Shelter System Flow Data" from OpenDataToronto, which provides data on the types of people in shelters, their ages, and their genders. The time period covered by this dataset is January 2018 to August 2024. This data is collected by the use of the Shelter Management Information System (SMIS) to intake people into various types of shelters (emergency, overnight, hotel/motel programs, etc). 
+
+The limitation of this dataset is that it excludes people not captured by SMIS. This includes individuals who stay outdoors on their own, or who use private & public homeless services that do not track data through SMIS. 
+
+
+## Variables in the cleaned Dataset {#sec-variables}
+1. **Date**: Records the month & year for which data is provided. The range   
+is from January 2018 to August 2024. 
+2. **Population**: Records the type of population: either the whole population 
+or subgroups that exist within the whole. 
+3. **Age under 16**: Records the number of people in the shelter system within 
+this age group. 
+4. **Age 16-24**: Records the number of people in the shelter system within 
+this age group. 
+5. **Age 25-34**: Records the number of people in the shelter system within 
+this age group. 
+6. **Age 35-44**: Records the number of people in the shelter system within 
+this age group. 
+7. **Age 45-54**: Records the number of people in the shelter system within 
+this age group. 
+8. **Age 55-65**: Records the number of people in the shelter system within 
+this age group. 
+9. **Age 65 and over**: Records the number of people in the shelter system within 
+this age group. 
+10. **Male**: Records the number of people in the shelter system who are male. 
+11. **Female**: Records the number of people in the shelter system who are female.
+12. **Transgender, other**: Records the number of people in the shelter system who are transgender, non-binary, or two-spirit. 
+13. **Population Percentage for a Group**: Records the proportion of the total shelter population that a group occupies. 
+
+
 
 Some of our data is of penguins (@fig-bills), from @palmerpenguins.
 
@@ -71,6 +111,34 @@ analysis_data |>
 
 Talk way more about it. 
 
+
+### Change in {#sec-timeline}
+```{r}
+#| label: fig-timeline
+#| fig-cap: Trends in the Type of Shelter Users 
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 8
+change_type <- combined_deaths %>%
+  pivot_longer(cols = c(yearly_drug_toxicity_deaths, yearly_unknown_deaths, yearly_total_deaths), 
+               names_to = "cause_of_death", 
+               values_to = "total_deaths")
+
+# Create the line plot for actual deaths 
+ggplot(long_deaths, aes(x = year_of_death, y = total_deaths, color = cause_of_death, group = cause_of_death)) +
+  geom_line(size = 1.2) +  # Draw the lines
+  geom_point(size = 3) +  # Add points for better visibility
+  labs(title = "Yearly Deaths by Cause Over Time(2017-2023)",
+       x = "Year",
+       y = "Total Deaths",
+       color = "Cause of Death") +  # Label the legend
+  theme_minimal() +
+  scale_color_manual(values = c("yearly_drug_toxicity_deaths" = "blue", 
+                                "yearly_unknown_deaths" = "red",
+                                "yearly_total_deaths" = "green")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8),
+        plot.title = element_text(size = 10))
 
 
 # Model

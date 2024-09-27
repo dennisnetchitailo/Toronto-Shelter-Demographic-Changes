@@ -5,6 +5,7 @@
 # Contact: dennis.netchitailo@utoronto.ca 
 # License: MIT
 # Pre-requisites: Run the files "01-download_data.R" and "02-data_cleaning.R"
+# Have the following libraries installed: "tidyverse"
 # Any other information needed? [...UPDATE THIS...]
 
 
