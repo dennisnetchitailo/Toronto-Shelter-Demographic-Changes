@@ -1,8 +1,7 @@
-# Starter folder
+# Changes in the demographics of Toronto's shelter system (2018-2024)
 
 ## Overview
-
-This repo provides students with a foundation for their own projects associated with *Telling Stories with Data*. You do not need every aspect for every paper and you should delete aspects that you do not need.
+This repository includes analysis explaining trends relating to the population of Toronto shelters from January 2018 to August 2024, as well as all scripts (download, cleaning, testing, modeling), prepared models, and a paper about the conducted analysis on this research topic. 
 
 
 ## File Structure
